@@ -8,23 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate.git"
+    "url": "https://github.com/SamDunner/W5D1_React_Intro"
   },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "reload",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "author": "Noah-Jerome Lotzer <n.lotzer@neusta.de>",
+  "author": "Sam Dunner",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
-  },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
   "devDependencies": {
     "babel-core": "6.10.4",
     "babel-loader": "6.0.1",
@@ -38,7 +25,7 @@
     "sass-loader": "4.0.0",
     "style-loader": "0.13.1",
     "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1"
+    "webpack-dev-server": "1.14.0"
   },
   "dependencies": {
     "react": "15.2.1",
