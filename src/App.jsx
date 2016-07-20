@@ -22,6 +22,7 @@ const App = React.createClass({
   getInitialState: function() {
     return data;
   },
+
   componentDidMount: function() {
     console.log("componentDidMount <App />");
     setTimeout(() => {
@@ -33,6 +34,12 @@ const App = React.createClass({
     }, 3000);
   },
 
+  _onNewMessage(msg) {
+    this.state.messages.push({id: 4, username: "Michelle", content: msg});
+      // Update the state of the app component. This will call render()
+      this.setState(this.state)
+  },
+
   render: function() {
     console.log("Rendering <App/>");
     return (
@@ -41,10 +48,15 @@ const App = React.createClass({
           <h1>Chatty</h1>
         </nav>
           <MessageList messages={this.state.messages} />
-          <ChatBar currentUser={this.state.currentUser} />
+          <ChatBar currentUser={this.state.currentUser} onNewMessage={this._onNewMessage} />
       </div>
     );
   }
 });
 
 export default App;
+
+
+
+
+
