@@ -4,7 +4,9 @@ const ChatBar = React.createClass({
   _handleInputChange(event) {
     console.log(event)
   },
-
+  _submitNewMessage(event) {
+    console.log(event.charCode == 13)
+  },
   render: function() {
     console.log("Rendering <ChatBar/>");
     return (
@@ -12,12 +14,13 @@ const ChatBar = React.createClass({
         <footer>
           <input id="username"
                  type="text"
-                 value={this.props.currentUser.name}
-                 onChange={this._handleInputChange}
+                 placeholder={this.props.currentUser.name}
           />
           <input id="new-message"
                  type="text"
                  placeholder="Type a message and hit ENTER"
+                 onChange={this._handleInputChange}
+                 onKeyPress={this._submitNewMessage}
           />
         </footer>
       </div>
