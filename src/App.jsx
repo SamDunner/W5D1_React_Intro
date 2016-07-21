@@ -23,7 +23,6 @@ const socket = new WebSocket("ws://localhost:4000");
 const App = React.createClass({
   getInitialState: function() {
     var data = {
-      currentUser: [],
       messages: [] // messages coming from the server will be stored here as they arrive
     };
     return data;
@@ -74,7 +73,7 @@ const App = React.createClass({
           <h1>Chatty</h1>
         </nav>
           <MessageList messages={this.state.messages} />
-          <ChatBar currentUser={this.state.currentUser} _onNewMessage={this._onNewMessage} />
+          <ChatBar _onNewMessage={this._onNewMessage} />
       </div>
     );
   }

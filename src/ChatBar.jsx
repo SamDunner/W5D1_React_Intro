@@ -2,21 +2,21 @@ import React from 'react';
 
 const ChatBar = React.createClass({
   getInitialState() {
-    return {new_message: "",
+    return {content: "",
             username: ""}
   },
 
   _handleInputChange(event) {
     this.setState({
       content: event.target.value,
-      type: "chatMessage"
+      type: "postMessage"
     })
   },
 
     _handleUserChange(event) {
     this.setState({
       username: event.target.value,
-      type: "chatMessage"
+      type: "postMessage"
     })
   },
 
@@ -32,14 +32,14 @@ const ChatBar = React.createClass({
       <div>
         <footer>
           <input id="username"
-                 type="text"
+                 type="postMessage"
                  placeholder="Your name!"
                  value={this.state.username}
                  onChange={this._handleUserChange}
                  onKeyPress={this._submitEnter}
           />
           <input id="new-message"
-                 type="text"
+                 type="postMessage"
                  placeholder="Type a message and hit ENTER"
                  value={this.state.content}
                  onChange={this._handleInputChange}
