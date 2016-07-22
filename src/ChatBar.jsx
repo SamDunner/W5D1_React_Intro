@@ -3,26 +3,37 @@ import React from 'react';
 const ChatBar = React.createClass({
   getInitialState() {
     return {content: "",
-            username: ""}
+            username: "Anonymous"}
   },
 
   _handleInputChange(event) {
     this.setState({
       content: event.target.value,
-      type: "postMessage"
     })
   },
 
-    _handleUserChange(event) {
+  _handleUserChange(event) {
     this.setState({
       username: event.target.value,
-      type: "postMessage"
     })
   },
 
-  _submitEnter(event) {
+  _submitEnterText(event) {
     if (event.charCode == 13) {
-      this.props._onNewMessage(this.state)
+      this.props._onNewMessage({
+        type: "chatMessage",
+        content: this.state.content,
+        username: this.state.username
+      });
+    }
+  },
+
+  _submitEnterUser(event) {
+    if (event.charCode == 13) {
+      this.props._onNewMessage({
+        type: "chatUser",
+        content: `${this.props.currentUser.username} changed their name to ${this.state.username}`
+      });
     }
   },
 
@@ -32,18 +43,18 @@ const ChatBar = React.createClass({
       <div>
         <footer>
           <input id="username"
-                 type="postMessage"
+                 type="text"
                  placeholder="Your name!"
                  value={this.state.username}
                  onChange={this._handleUserChange}
-                 onKeyPress={this._submitEnter}
+                 onKeyPress={this._submitEnterUser}
           />
           <input id="new-message"
-                 type="postMessage"
+                 type="text"
                  placeholder="Type a message and hit ENTER"
                  value={this.state.content}
                  onChange={this._handleInputChange}
-                 onKeyPress={this._submitEnter}
+                 onKeyPress={this._submitEnterText}
           />
         </footer>
       </div>

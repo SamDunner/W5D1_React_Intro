@@ -10,7 +10,7 @@ const MessageList = React.createClass({
         {
           messages.map(function(m) {
             return (
-              <Message data={m} key={m.id} />
+              <Message data={m.content} key={m.id} />
             );
           })
         }
