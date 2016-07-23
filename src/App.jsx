@@ -5,17 +5,17 @@ import ChatBar from './ChatBar.jsx';
 const socket = new WebSocket("ws://localhost:4000");
 
 const App = React.createClass({
+
   getInitialState: function() {
     var data = {
       currentUser: {username: "Anonymous"},
       messages: [],
-      totalUser: 0 // messages coming from the server will be stored here as they arrive
+      totalUsers: 0
     };
     return data;
   },
 
   componentDidMount: function() {
-    // console.log("componentDidMount <App />");
 
     socket.onopen = () => {
         const event_data = JSON.stringify({
@@ -36,7 +36,7 @@ const App = React.createClass({
           alert(message.content);
           break;
         case "clientsOnline":
-          this.state.totalUser = message.content;
+          this.state.totalUsers = message.content;
           this.setState(this.state);
         default:
           console.log("unknown action");
@@ -59,14 +59,7 @@ const App = React.createClass({
         default:
           break;
       }
-
-    //this.state.data.messages.push({username: msg.currentUser, content: msg.new_message});
-    // Update the state of the app component. This will call render()
-    // this.setState({data: this.state.data});
-    // console.log(msg);
-    // socket.send(JSON.stringify(msg))
   },
-
 
   render: function() {
     console.log("Rendering <App/>");
@@ -74,7 +67,7 @@ const App = React.createClass({
       <div className="wrapper">
         <nav>
           <h1>Chatty</h1>
-          <h4>  Current Users: {this.state.totalUser} </h4>
+          <h4>Current Users: {this.state.totalUsers}</h4>
         </nav>
           <MessageList messages={this.state.messages}
           />

@@ -3,19 +3,19 @@ import React from 'react';
 const ChatBar = React.createClass({
   getInitialState() {
     return {content: "",
-            username: "Anonymous"}
+            username: ""}
   },
 
   _handleInputChange(event) {
     this.setState({
       content: event.target.value,
-    })
+    });
   },
 
   _handleUserChange(event) {
     this.setState({
       username: event.target.value,
-    })
+    });
   },
 
   _submitEnterText(event) {
@@ -38,7 +38,6 @@ const ChatBar = React.createClass({
   },
 
   render: function() {
-    console.log("Rendering <ChatBar/>");
     return (
       <div>
         <footer>

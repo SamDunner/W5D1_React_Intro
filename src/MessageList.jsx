@@ -3,14 +3,13 @@ import Message from './Message.jsx';
 
 const MessageList = React.createClass({
   render: function() {
-    console.log("Rendering <MessageList/>");
     var messages = this.props.messages;
     return (
       <div id="message-list">
         {
-          messages.map(function(m) {
+          messages.map(function(message) {
             return (
-              <Message data={m.content} key={m.id} postUser={m.username} />
+              <Message data={message.content} key={message.id} postUser={message.username} />
             );
           })
         }
