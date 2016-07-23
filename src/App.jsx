@@ -17,14 +17,6 @@ const App = React.createClass({
 
   componentDidMount: function() {
 
-    socket.onopen = () => {
-        const event_data = JSON.stringify({
-          type: "new_user",
-          content: this.state.currentUser
-        });
-      socket.send(event_data);
-    };
-
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
       switch (message.type) {
@@ -38,6 +30,7 @@ const App = React.createClass({
         case "clientsOnline":
           this.state.totalUsers = message.content;
           this.setState(this.state);
+          break;
         default:
           console.log("unknown action");
           break;
@@ -46,7 +39,6 @@ const App = React.createClass({
   },
 
   _onNewMessage: function(msg) {
-
       switch(msg.type){
         case "chatUser":
           this.state.currentUser.username = msg.currentUser;
@@ -61,8 +53,12 @@ const App = React.createClass({
       }
   },
 
+  _onUsernameChange: function(name) {
+          this.state.currentUser.username = name;
+          this.setState(this.state);
+  },
+
   render: function() {
-    console.log("Rendering <App/>");
     return (
       <div className="wrapper">
         <nav>
@@ -73,6 +69,7 @@ const App = React.createClass({
           />
           <ChatBar _onNewMessage={this._onNewMessage}
                    currentUser={this.state.currentUser}
+                   _onUsernameChange={this._onUsernameChange}
           />
       </div>
     );

@@ -3,7 +3,7 @@ import React from 'react';
 const ChatBar = React.createClass({
   getInitialState() {
     return {content: "",
-            username: ""}
+            username: "Anonymous"}
   },
 
   _handleInputChange(event) {
@@ -34,17 +34,23 @@ const ChatBar = React.createClass({
         type: "chatUser",
         content: `${this.props.currentUser.username} changed their name to ${this.state.username}`
       });
+      this.props._onUsernameChange(this.state.username);
     }
   },
 
   render: function() {
+    if (this.state.username === "Anonymous") {
+      var username = "";
+    } else {
+      var username = this.state.username;
+    }
     return (
       <div>
         <footer>
           <input id="username"
                  type="text"
                  placeholder="Your name!"
-                 value={this.state.username}
+                 value={username}
                  onChange={this._handleUserChange}
                  onKeyPress={this._submitEnterUser}
           />

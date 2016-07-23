@@ -9,7 +9,10 @@ const MessageList = React.createClass({
         {
           messages.map(function(message) {
             return (
-              <Message data={message.content} key={message.id} postUser={message.username} />
+              <Message data={message.content}
+                       key={message.id}
+                       postUser={message.username}
+              />
             );
           })
         }
