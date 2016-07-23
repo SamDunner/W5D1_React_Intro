@@ -8,21 +8,10 @@ const App = React.createClass({
   getInitialState: function() {
     var data = {
       currentUser: {username: "Anonymous"},
-      messages: [] // messages coming from the server will be stored here as they arrive
+      messages: [],
+      totalUser: 0 // messages coming from the server will be stored here as they arrive
     };
     return data;
-  },
-
-  // _onSocketNewUser(data){
-  //   if(data.currentUser != this.state.currentUser){
-  //     this.setState({
-  //       users: [...this.state.users, data.content]
-  //     });
-  //   }
-  // },
-
-  _onSocketNewMessage(data){
-
   },
 
   componentDidMount: function() {
@@ -34,20 +23,21 @@ const App = React.createClass({
           content: this.state.currentUser
         });
       socket.send(event_data);
-      // const testMessage = JSON.stringify({type: "test", message: "server receives stuff"});
-      // socket.send(testMessage);
     };
 
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
       switch (message.type) {
         case "outgoingMessage":
-          this.state.data.messages.push(message);
+          this.state.messages.push(message);
           this.setState(this.state);
           break;
         case "outgoingUser":
           alert(message.content);
           break;
+        case "clientsOnline":
+          this.state.totalUser = message.content;
+          this.setState(this.state);
         default:
           console.log("unknown action");
           break;
@@ -84,6 +74,7 @@ const App = React.createClass({
       <div className="wrapper">
         <nav>
           <h1>Chatty</h1>
+          <h4>  Current Users: {this.state.totalUser} </h4>
         </nav>
           <MessageList messages={this.state.messages}
           />
